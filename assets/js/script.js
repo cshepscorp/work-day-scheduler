@@ -5,14 +5,12 @@ currentDay.textContent = moment().format('dddd, MMMM Do');
 var currentMoment = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 var currentHour = moment().format('HH');
-console.log(currentHour);
 
-// var currentHourString = JSON.stringify(currentHour);
-// console.log(typeof currentHourString);
 
 for (var i = 9; i <= 17; i++) {
     var timeSlot = i;
     var currentState;
+    
     // timeblock is color coded to indicate whether it is in the past, present, or future
     if (currentHour === i) {
         $(".textarea").addClass("present");
@@ -22,24 +20,15 @@ for (var i = 9; i <= 17; i++) {
         $(".textarea").addClass("past");
     }
 
-    // if (currentHour === i) {
-    //     $(".textarea").addClass("present");
-    // } if (currentHour < i) {
-    //     $(".textarea").addClass("future");
-    // } else {
-    //     $(".textarea").addClass("past");
-    // }
-
-    var newStuff =
+    var dyanamicTimeSlots =
         `<div class="row" id='hour-${i}'>
                 <span class="hour col-md-1">${timeSlot}</span>
                 <textarea class="col-md-10 past textarea${i} hour-${i}"></textarea>
                 <button class="btn col-md-1 saveBtn"><i class="far fa-save"></i></button>
          </div> 
-        `
-        ;
+        `;
 
-    $("#dynamic-hours").append(newStuff);
+    $("#dynamic-hours").append(dyanamicTimeSlots);
 
 };
 
@@ -69,12 +58,19 @@ $('.saveBtn').on('click', function(event) {
 
     var time = $(this).parent().attr("id");
     var task = $(this).siblings("textarea").val();
-    console.log(task);
+    console.log(time, task);
 
     localStorage.setItem(time, task);
 
-    // saveTasks();
 }); 
+
+var setTimeSlot = function() {
+    for (var i = 9; i <= 17; i++) {
+        $(`.hour-${i}`).val(localStorage.getItem(`hour-${i}`));
+    }
+}
+
+setTimeSlot();
 
 
 // var setTimeSlot = function() {
