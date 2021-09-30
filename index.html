@@ -28,70 +28,22 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="current-day" class="lead"></p>
     </header>
+    <!-- simple legend explaining color coding of time slots -->
+    <div class="container">
+      <div class="row col-md-12 justify-content-center" style="height: 20px;height:40px;">
+        <div class="text-right legend">Legend: </div>
+        <div class="past text-center legend">Past</div>
+        <div class="current text-center legend">Current</div>
+        <div class="future text-center legend">Future</div>
+        <div class="text-center legend"><button class="clearBtn" id="reset">Clear My Schedule</button></div>
+      </div>
+    </div>
+    <!-- script is dynamically creating the divs to hold the task hour slots -->
     <div class="container" id="dynamic-hours">
 
-
     </div>
-    <!-- <div class="container">
-      <!-- Timeblocks go here -->
-<!-- 
-      <div class="row" id="hour-09">
-        <span class="hour col-md-1" id="09">9 AM</span>
-        <textarea class="col-md-10 textarea hour-09" id="hour-09" placeholder="Click anywhere in this textarea to add a task"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-09 saveBtn"><i class="far fa-save"></i></button>
-      </div>
 
-      <div class="row" id="hour-10">
-        <span class="col-md-1 hour" id="10">10 AM</span>
-        <textarea class="col-md-10 textarea hour-10"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-10 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-11">
-        <span class="col-md-1 hour" id="11">11 AM</span>
-        <textarea class="col-md-10 textarea hour-11"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-11 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-12">
-        <span class="col-md-1 hour" id="12">12 Noon</span>
-        <textarea class="col-md-10 textarea hour-12"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-12 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-13">
-        <span class="col-md-1 hour"  id="13">1 PM</span>
-        <textarea class="col-md-10 textarea hour-13"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-13 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-14">
-        <span class="col-md-1 hour" id="14">2 PM</span>
-        <textarea class="col-md-10 textarea hour-14"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-14 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-15">
-        <span class="col-md-1 hour"  id="15">3 PM</span>
-        <textarea class="col-md-10 textarea hour-15"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-15 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-16">
-        <span class="col-md-1 hour" id="16">4 PM</span>
-        <textarea class="col-md-10 textarea hour-16"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-16 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-      <div class="row" id="hour-17">
-        <span class="col-md-1 hour"  id="17">5 PM</span>
-        <textarea class="col-md-10 textarea hour-17"></textarea>
-        <button class="btn col-md-1 saveBtn" id="btn-hour-17 saveBtn"><i class="far fa-save"></i></button>
-      </div>
-
-
-    </div>-->
-
+    <!-- scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>

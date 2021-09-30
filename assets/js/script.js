@@ -3,44 +3,66 @@ var currentDay = document.querySelector("#current-day");
 currentDay.textContent = moment().format('dddd, MMMM Do');
 
 var currentMoment = moment().format('MMMM Do YYYY, h:mm:ss a');
-
 var currentHour = moment().format('HH');
+var dynamicTimeSlots = document.querySelector('#dynamic-hours');
 
 for (var i = 9; i <= 17; i++) {
     var timeSlot = i;
-    var currentState;
+    var colorCodes;
     
-    // timeblock is color coded to indicate whether it is in the past, present, or future
-    if (currentHour === i) {
-        $(".textarea").addClass("present");
-    } else if (currentHour < i) {
-        $(".textarea").addClass("future");
+    // replaces the colorCodes placeholder in the template literal
+    // to add a class-name to the textarea's based on the time of day
+    if (currentHour == i) {
+        colorCodes = 'current' 
+    } else if (currentHour < i) { 
+        colorCodes = 'future'
     } else {
-        $(".textarea").addClass("past");
+        colorCodes = 'past'
     }
 
     var formattedTimes = ["", "", "", "", "", "", "", "", "", "9AM", "10AM", "11AM", "12 Noon", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"];
 
-    var dyanamicTimeSlots =
-        `<div class="row" id='hour-${i}'>
-                <span class="hour col-md-1" id='label-${i}'>${formattedTimes[i]}</span>
-                <textarea class="col-md-10 past textarea${i} hour-${i}"></textarea>
-                <button class="btn col-md-1 saveBtn"><i class="far fa-save"></i></button>
-         </div> 
-        `;
+    // ${} are placeholders referencing any valid JavaScript expression 
+    // such as variable, arithmetic operation, function call, and others
+    // var dynamicTimeSlots =
+        
+    //     `<div class="row" id='hour-${i}'>
+    //             <span class='hour col-md-1' id='label-${i}'>${formattedTimes[i]}</span>
+    //             <textarea class='col-md-10 textarea${i} hour-${i} ${colorCodes}'></textarea>
+    //             <button class='btn col-md-1 saveBtn'><i class='far fa-save'></i></button>
+    //      </div> 
+    //     `;
 
-    $("#dynamic-hours").append(dyanamicTimeSlots);
+    // $("#dynamic-hours").append(dynamicTimeSlots);  
 
+    // create div to hold times by hour
+    var dynamicTimeDiv = document.createElement('div');
+    dynamicTimeDiv.className = 'row';
+    dynamicTimeDiv.id = 'hour-' + [i];
+
+    dynamicTimeSlots.append(dynamicTimeDiv);
+
+    // create span to hold hour label and add to div above
+    var dynamicTimeSpan = document.createElement('span');
+    dynamicTimeSpan.className = 'hour col-md-1';
+    dynamicTimeSpan.id = 'label-' + [i];
+    dynamicTimeSpan.textContent = formattedTimes[i];
+
+    dynamicTimeDiv.append(dynamicTimeSpan);
+
+    // create textarea to hold tasks and add to div above
+    var dynamicTimeTextarea = document.createElement('textarea');
+    dynamicTimeTextarea.classList.add('col-md-10', 'hour-' + [i], 'textarea' + [i], colorCodes);
+
+    dynamicTimeDiv.append(dynamicTimeTextarea);
+
+    // create button for saving tasks and add to div above
+    var dynamicTimeButton = document.createElement('button');
+    dynamicTimeButton.className = 'btn col-md-1 saveBtn';
+    dynamicTimeButton.innerHTML = `<i class='far fa-save'></i>`;
+
+    dynamicTimeDiv.append(dynamicTimeButton);
 };
-
-// var $times = [];
-// $('span').each(function(){
-//     var id = $(this).attr('id');
-//     $times.push(id);
-
-//     console.log($times);
-//     console.log(typeof $times);
-// });
 
 // task section was clicked
 $(".col-md-10").on("click", "textarea", function() {
@@ -59,118 +81,25 @@ $('.saveBtn').on('click', function(event) {
 
     var time = $(this).parent().attr("id");
     var task = $(this).siblings("textarea").val();
-    console.log(time, task);
-
+    // console.log(time, task);
     localStorage.setItem(time, task);
 
 }); 
 
+// adds saved content to localStorage
 var setTimeSlot = function() {
-    for (var i = 9; i <= 17; i++) {
+    for (var i = 9; i <= 17; i++) { // uses same for loop as the initial div setup
         $(`.hour-${i}`).val(localStorage.getItem(`hour-${i}`));
     }
 }
 
 setTimeSlot();
-// var fixLabel9 = document.querySelector("#label-9");
-// fixLabel9.textContent = "9AM";
 
-// var fixLabel10 = document.querySelector("#label-10");
-// fixLabel10.textContent = "10AM";
+// button for user to easily reset their day
+var resetSchedule = function(){
+    localStorage.clear();
+    location.reload();
+}
 
-// var fixLabel11 = document.querySelector("#label-11");
-// fixLabel11.textContent = "11AM";
-
-// var fixLabel12 = document.querySelector("#label-12");
-// fixLabel12.textContent = "Noon";
-
-// var fixLabel13 = document.querySelector("#label-13");
-// fixLabel13.textContent = "1PM";
-
-// var fixLabel14 = document.querySelector("#label-14");
-// fixLabel14.textContent = "2PM";
-
-// var fixLabel15 = document.querySelector("#label-15");
-// fixLabel15.textContent = "3PM";
-
-// var fixLabel16 = document.querySelector("#label-16");
-// fixLabel16.textContent = "4PM";
-
-// var fixLabel17 = document.querySelector("#label-17");
-// fixLabel17.textContent = "5PM";
-// var setTimeSlot = function() {
-//     if (currentHour == "09") {
-//         $(".hour-09").addClass("present");
-//     } if (currentHour < "09") {
-//         $(".hour-09").addClass("future");
-//     } else {
-//         $(".hour-09").addClass("past");
-//     }
-    
-//     if (currentHour == "10") {
-//         $(".hour-10").addClass("present");
-//     } if (currentHour < "10") {
-//         $(".hour-10").addClass("future");
-//     } else {
-//         $(".hour-10").addClass("past");
-//     }
-
-//     if (currentHour == "11") {
-//         $(".hour-11").addClass("present");
-//     } if (currentHour < "11") {
-//         $(".hour-11").addClass("future");
-//     } else {
-//         $(".hour-11").addClass("past");
-//     }
-
-//     if (currentHour == "12") {
-//         $(".hour-12").addClass("present");
-//     } if (currentHour < "12") {
-//         $(".hour-12").addClass("future");
-//     } else {
-//         $(".hour-12").addClass("past");
-//     }
-
-//     if (currentHour == "13") {
-//         $(".hour-13").addClass("present");
-//     } if (currentHour < "13") {
-//         $(".hour-13").addClass("future");
-//     } else {
-//         $(".hour-13").addClass("past");
-//     }
-
-//     if (currentHour == "14") {
-//         $(".hour-14").addClass("present");
-//     } if (currentHour < "14") {
-//         $(".hour-14").addClass("future");
-//     } else {
-//         $(".hour-14").addClass("past");
-//     }
-
-//     if (currentHour == "15") {
-//         $(".hour-15").addClass("present");
-//     } if (currentHour < "15") {
-//         $(".hour-15").addClass("future");
-//     } else {
-//         $(".hour-15").addClass("past");
-//     }
-
-//     if (currentHour == "16") {
-//         $(".hour-16").addClass("present");
-//     } if (currentHour < "16") {
-//         $(".hour-16").addClass("future");
-//     } else {
-//         $(".hour-16").addClass("past");
-//     }
-
-//     if (currentHour == "17") {
-//         $(".hour-17").addClass("present");
-//     } if (currentHour < "17") {
-//         $(".hour-17").addClass("future");
-//     } else {
-//         $(".hour-17").addClass("past");
-//     }
-
-// }
-// setTimeSlot();
+document.getElementById("reset").addEventListener("click", resetSchedule);
 
