@@ -6,6 +6,8 @@ var currentMoment = moment().format('MMMM Do YYYY, h:mm:ss a');
 var currentHour = moment().format('HH');
 var dynamicTimeSlots = document.querySelector('#dynamic-hours');
 
+var textareas = document.querySelector("#col-md-10");
+
 for (var i = 9; i <= 17; i++) {
     var timeSlot = i;
     var colorCodes;
@@ -20,26 +22,13 @@ for (var i = 9; i <= 17; i++) {
         colorCodes = 'past'
     }
 
+    // array holding formatted values for Time Slots for easier consumption
     var formattedTimes = ["", "", "", "", "", "", "", "", "", "9AM", "10AM", "11AM", "12 Noon", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"];
-
-    // ${} are placeholders referencing any valid JavaScript expression 
-    // such as variable, arithmetic operation, function call, and others
-    // var dynamicTimeSlots =
-        
-    //     `<div class="row" id='hour-${i}'>
-    //             <span class='hour col-md-1' id='label-${i}'>${formattedTimes[i]}</span>
-    //             <textarea class='col-md-10 textarea${i} hour-${i} ${colorCodes}'></textarea>
-    //             <button class='btn col-md-1 saveBtn'><i class='far fa-save'></i></button>
-    //      </div> 
-    //     `;
-
-    // $("#dynamic-hours").append(dynamicTimeSlots);  
 
     // create div to hold times by hour
     var dynamicTimeDiv = document.createElement('div');
     dynamicTimeDiv.className = 'row';
     dynamicTimeDiv.id = 'hour-' + [i];
-
     dynamicTimeSlots.append(dynamicTimeDiv);
 
     // create span to hold hour label and add to div above
@@ -47,12 +36,11 @@ for (var i = 9; i <= 17; i++) {
     dynamicTimeSpan.className = 'hour col-md-1';
     dynamicTimeSpan.id = 'label-' + [i];
     dynamicTimeSpan.textContent = formattedTimes[i];
-
     dynamicTimeDiv.append(dynamicTimeSpan);
 
     // create textarea to hold tasks and add to div above
     var dynamicTimeTextarea = document.createElement('textarea');
-    dynamicTimeTextarea.classList.add('col-md-10', 'hour-' + [i], 'textarea' + [i], colorCodes);
+    dynamicTimeTextarea.classList.add(colorCodes, 'col-md-10', 'hour-' + [i], 'textarea' + [i]);
 
     dynamicTimeDiv.append(dynamicTimeTextarea);
 
@@ -65,7 +53,7 @@ for (var i = 9; i <= 17; i++) {
 };
 
 // task section was clicked
-$(".col-md-10").on("click", "textarea", function() {
+$(textareas).on("click", "textarea", function() {
     // get current text of element
     var text = $(this)
       .text().trim();
