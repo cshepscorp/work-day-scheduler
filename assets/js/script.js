@@ -21,6 +21,7 @@ for (var i = 9; i <= 17; i++) {
     } else {
         colorCodes = 'past'
     }
+    console.log(currentHour);
 
     // array holding formatted values for Time Slots for easier consumption
     var formattedTimes = ["", "", "", "", "", "", "", "", "", "9AM", "10AM", "11AM", "12 Noon", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"];
@@ -33,20 +34,20 @@ for (var i = 9; i <= 17; i++) {
 
     // create span to hold hour label and add to div above
     var dynamicTimeSpan = document.createElement('span');
-    dynamicTimeSpan.className = 'hour col-md-1';
+    dynamicTimeSpan.className = 'hour col-md-1 col-2';
     dynamicTimeSpan.id = 'label-' + [i];
     dynamicTimeSpan.textContent = formattedTimes[i];
     dynamicTimeDiv.append(dynamicTimeSpan);
 
     // create textarea to hold tasks and add to div above
     var dynamicTimeTextarea = document.createElement('textarea');
-    dynamicTimeTextarea.classList.add(colorCodes, 'col-md-10', 'hour-' + [i], 'textarea' + [i]);
+    dynamicTimeTextarea.classList.add(colorCodes, 'col-md-10', 'col-8', 'hour-' + [i], 'textarea' + [i]);
 
     dynamicTimeDiv.append(dynamicTimeTextarea);
 
     // create button for saving tasks and add to div above
     var dynamicTimeButton = document.createElement('button');
-    dynamicTimeButton.className = 'btn col-md-1 saveBtn';
+    dynamicTimeButton.className = 'btn col-md-1 col-2 saveBtn';
     dynamicTimeButton.innerHTML = `<i class='far fa-save'></i>`;
 
     dynamicTimeDiv.append(dynamicTimeButton);
